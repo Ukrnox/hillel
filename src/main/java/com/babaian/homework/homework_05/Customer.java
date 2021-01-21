@@ -5,14 +5,12 @@ import java.util.Objects;
 public class Customer {
     private String name;
     private int age;
-    private static int id;
     private int customerId;
 
-    public Customer(String name, int age) {
+    public Customer(String name, int age, int customerId) {
         this.name = name;
         this.age = age;
-        id++;
-        this.customerId = id;
+        this.customerId = customerId;
     }
 
     public String getName() {
@@ -59,13 +57,4 @@ public class Customer {
         return Objects.hash(name, age, customerId);
     }
 
-    public static void main(String[] args) {
-        Customer customer1 = new Customer("Vasya", 18);
-        Customer customer2 = new Customer("Vasya", 18);
-        Customer customer3 = new Customer("Vasya", 18);
-        System.out.println(customer1);
-        System.out.println(customer2);
-        System.out.println(customer3.customerId);
-        System.out.println(customer1.customerId);
-    }
 }

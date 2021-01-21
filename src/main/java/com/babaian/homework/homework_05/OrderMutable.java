@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class OrderMutable {
     private int orderId;
-    private LocalDate deliveryDate; //использовал вместо Date в "class OrderImmutable" сделал с Date.
+    private LocalDate deliveryDate;
     private Customer customer;
     private int customerId;
     private String address;
@@ -71,7 +71,11 @@ public class OrderMutable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderMutable that = (OrderMutable) o;
-        return orderId == that.orderId && customerId == that.customerId && deliveryDate.equals(that.deliveryDate) && customer.equals(that.customer) && address.equals(that.address);
+        return orderId == that.orderId &&
+                customerId == that.customerId &&
+                deliveryDate.equals(that.deliveryDate) &&
+                customer.equals(that.customer) &&
+                address.equals(that.address);
     }
 
     @Override
@@ -79,10 +83,4 @@ public class OrderMutable {
         return Objects.hash(orderId, deliveryDate, customer, customerId, address);
     }
 
-    public static void main(String[] args) {
-        Customer customer = new Customer("Vasya", 18);
-        LocalDate date = LocalDate.now().plusDays(5);
-        OrderMutable order1 = new OrderMutable(2, date, customer, "Ivanova 10");
-        System.out.println(order1);
-    }
 }
