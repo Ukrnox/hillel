@@ -1,63 +1,70 @@
 package com.babaian.homework.homework_06;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 class FractionTest {
-    private static Fraction fraction;
+    private static Fraction fraction1;
     private static Fraction fraction2;
     private static Fraction fraction3;
 
-    @BeforeEach
-    void setUp() {
-     fraction = new FractionNumber(3,3);
-     fraction2 = new FractionNumber(1,3);
-     fraction3 = new FractionNumber(3,4);
-    }
-
-    @AfterEach
-    void tearDown() {
+    @BeforeAll
+    static void setUp() {
+        fraction1 = new FractionNumber(1, 3);
+        fraction2 = new FractionNumber(2, 3);
+        fraction3 = new FractionNumber(3, 4);
     }
 
     @Test
-    void plus() {
-        var result = fraction.plus(fraction2);
+    void badFractionCreation() {
+        assertThrows(IllegalArgumentException.class,() -> new FractionNumber(1,0));
+    }
+
+    @Test
+    void testEquals() {
+        assertEquals(new FractionNumber(1, 3), fraction1);
+        assertNotEquals(fraction2, fraction1);
+        assertEquals(new FractionNumber(3, 9), fraction1);
+        assertEquals(new FractionNumber(3, 1), new FractionNumber(9, 3));
+    }
+
+    @Test
+    void testPlusWithTheSameDenominator() {
+        Fraction result = fraction1.plus(fraction2);
         assertEquals(new FractionNumber(3,3),result);
+        assertEquals(new FractionNumber(1,1),result);
+    }
+
+    @Test
+    void testPlusWithNotTheSameDenominator() {
+        Fraction result = fraction1.plus(fraction3);
+        assertEquals(new FractionNumber(13,12),result);
     }
 
     @Test
     void minus() {
-        var result = fraction.minus(fraction2);
+        Fraction result = fraction1.minus(fraction2);
+        Fraction result2 = fraction1.minus(fraction3);
         assertEquals(new FractionNumber(-1,3),result);
+        assertEquals(new FractionNumber(-5,12),result2);
     }
 
     @Test
     void multiply() {
-        var result = fraction.multiply(fraction2);
+        Fraction result = fraction1.multiply(fraction2);
+        Fraction result2 = fraction1.multiply(fraction3);
         assertEquals(new FractionNumber(2,9),result);
+        assertEquals(new FractionNumber(3,12),result2);
     }
 
     @Test
     void divide() {
-        var result = fraction.divide(fraction2);
-        assertEquals(new FractionNumber(3,6),result);
-    }
-
-    @Test
-    void testPlusWithTheSameDenominator (){
-        var result = fraction.multiply(fraction2);
-        assertEquals(new FractionNumber(1,3),result);
-    }
-
-
-    @Test
-    void comDenominator() {
-    }
-
-    @Test
-    void comDivisor() {
+        Fraction result = fraction1.divide(fraction2);
+        Fraction result2 = fraction1.divide(fraction3);
+        assertEquals(new FractionNumber(1,2),result);
+        assertEquals(new FractionNumber(4,9),result2);
     }
 }
