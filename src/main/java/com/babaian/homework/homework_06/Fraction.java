@@ -14,6 +14,7 @@ public interface Fraction {
 
     Fraction divide(Fraction a);
 
+    String printToMixedFractions();
 
     default int comDenominator(int a, int b) {
         int temp = a;

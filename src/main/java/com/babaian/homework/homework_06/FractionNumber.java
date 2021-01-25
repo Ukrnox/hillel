@@ -49,6 +49,7 @@ public class FractionNumber implements Fraction {
         return this.multiply(new FractionNumber(a.getDenominator(), a.getNumerator()));
     }
 
+    @Override
     public String printToMixedFractions() {// добавил возможность вывода в консоль целого если оно есть ex: "-3 and 9/127"
         int whole = numerator / denominator;
         if (whole == 0) {
