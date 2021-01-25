@@ -2,7 +2,7 @@ package com.babaian.homework.homework_06;
 
 import java.util.Objects;
 
-public class FractionNumber implements Fraction<FractionNumber> {
+public class FractionNumber implements Fraction {
 
     private final int numerator;
     private final int denominator;
@@ -26,26 +26,26 @@ public class FractionNumber implements Fraction<FractionNumber> {
     }
 
     @Override
-    public FractionNumber plus(FractionNumber a) {
+    public Fraction plus(Fraction a) {
         int comDenominator = comDenominator(this.denominator, a.getDenominator());
         return new FractionNumber(((this.numerator * (comDenominator / this.denominator)) +
                 (a.getNumerator() * comDenominator / a.getDenominator())), (comDenominator));
     }
 
     @Override
-    public FractionNumber minus(FractionNumber a) {
+    public Fraction minus(Fraction a) {
         int comDenominator = comDenominator(this.denominator, a.getDenominator());
         return new FractionNumber(((this.numerator * (comDenominator / this.denominator)) -
                 (a.getNumerator() * comDenominator / a.getDenominator())), (comDenominator));
     }
 
     @Override
-    public FractionNumber multiply(FractionNumber a) {
+    public Fraction multiply(Fraction a) {
         return new FractionNumber((this.numerator * a.getNumerator()), this.denominator * a.getDenominator());
     }
 
     @Override
-    public FractionNumber divide(FractionNumber a) {
+    public Fraction divide(Fraction a) {
         return this.multiply(new FractionNumber(a.getDenominator(), a.getNumerator()));
     }
 
@@ -62,8 +62,7 @@ public class FractionNumber implements Fraction<FractionNumber> {
 
     @Override
     public String toString() {
-        return numerator / comDivisor(numerator, denominator) +
-                "/" + denominator / comDivisor(numerator, denominator);
+        return numerator + "/" + denominator;
     }
 
     @Override

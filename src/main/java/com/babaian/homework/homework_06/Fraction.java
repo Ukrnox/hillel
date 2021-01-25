@@ -1,18 +1,18 @@
 package com.babaian.homework.homework_06;
 
-public interface Fraction <T> {
+public interface Fraction {
 
     int getNumerator();
 
     int getDenominator();
 
-    T plus(T a);
+    Fraction plus(Fraction a);
 
-    T minus(T a);
+    Fraction minus(Fraction a);
 
-    T multiply(T a);
+    Fraction multiply(Fraction a);
 
-    T divide(T a);
+    Fraction divide(Fraction a);
 
 
     default int comDenominator(int a, int b) {
