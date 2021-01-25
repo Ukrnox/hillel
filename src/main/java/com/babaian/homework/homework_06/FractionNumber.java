@@ -2,7 +2,7 @@ package com.babaian.homework.homework_06;
 
 import java.util.Objects;
 
-public class FractionNumber implements Fraction <FractionNumber> {
+public class FractionNumber implements Fraction<FractionNumber> {
 
     private final int numerator;
     private final int denominator;
@@ -11,9 +11,8 @@ public class FractionNumber implements Fraction <FractionNumber> {
         if (denominator == 0) {
             throw new IllegalArgumentException("Zero in the denominator!\u2639");
         }
-        this.numerator = numerator;
-        this.denominator = denominator;
-
+        this.numerator = numerator / comDivisor(numerator, denominator);
+        this.denominator = denominator / comDivisor(numerator, denominator);
     }
 
     @Override
