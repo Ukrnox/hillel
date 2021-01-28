@@ -2,7 +2,7 @@ package com.babaian.homework.homework_06;
 
 import java.util.Objects;
 
-public class FractionNumber implements Fraction {
+public final class FractionNumber implements Fraction {
 
     private final int numerator;
     private final int denominator;
