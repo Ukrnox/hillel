@@ -21,7 +21,6 @@ class CapitalizeTest {
 //    @Mock
 //    Scanner scanner;
 
-
     @Test
     void getUpperCaseInput() {
         var capitalazer = new Capitalize (getter);
