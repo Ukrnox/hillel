@@ -1,6 +1,7 @@
 package com.babaian.homework.homework_08_1;
 
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
@@ -75,38 +76,52 @@ public final class Author {
         }
 
 
-    public String getTitle() {
-        return title;
-    }
+        public String getTitle() {
+            return title;
+        }
 
-    public Author getAuthor() {
-        return author;
-    }
+        public Author getAuthor() {
+            return author;
+        }
 
-    public Date getIssueDate() {
-        return new Date(issueDate.getTime());
-    }
+        public Date getIssueDate() {
+            return new Date(issueDate.getTime());
+        }
 
-    public Genre getGenre() {
-        return genre;
-    }
+        public Genre getGenre() {
+            return genre;
+        }
 
-    public long getIsbn() {
-        return isbn;
-    }
+        public long getIsbn() {
+            return isbn;
+        }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Book book = (Book) o;
-        return Objects.equals(title, book.title) &&
-                Objects.equals(author, book.author) &&
-                Objects.equals(issueDate, book.issueDate) &&
-                genre == book.genre && Objects.equals(isbn, book.isbn);
-    }
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Book book = (Book) o;
+            return Objects.equals(title, book.title) &&
+                    Objects.equals(author, book.author) &&
+                    Objects.equals(issueDate, book.issueDate) &&
+                    genre == book.genre && Objects.equals(isbn, book.isbn);
+        }
 
+        @Override
+        public int hashCode() {
+            return Objects.hash(title, author, issueDate, genre, isbn);
+        }
 
+        @Override
+        public String toString() {
+            return "Book { \n " +
+                    "title : '" + title + '\'' +
+                    ",\n" + author +
+                    ",\n issueDate : " + issueDate +
+                    ",\n genre : '" + genre +
+                    "',\n isbn : " + isbn +
+                    " }";
+        }
     }
 
     public enum Genre {
@@ -121,5 +136,11 @@ public final class Author {
         public String toString() {
             return genre;
         }
+    }
+
+    public static void main(String[] args) {
+        Author author = Author.setAuthor("Petya","Petrenko",LocalDate.of(1988,11,5));
+        Book book = author.setBook("Tril",new Date(120, Calendar.APRIL,22),Genre.FAIRY_TALE,213213L);
+        System.out.println(book);
     }
 }
