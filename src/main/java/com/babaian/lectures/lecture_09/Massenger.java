@@ -1,4 +1,4 @@
-package com.babaian.lectures.lecture_10;
+package com.babaian.lectures.lecture_09;
 
 public interface Massenger {
    void sendMessage(String message);

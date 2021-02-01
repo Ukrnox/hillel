@@ -1,4 +1,4 @@
-package com.babaian.lectures.lecture_10;
+package com.babaian.lectures.lecture_09;
 
 public class Main {
 
@@ -12,6 +12,5 @@ public class Main {
         Massenger m2 = message -> System.out.println("12313213");
 
         m.sendMessage("asd");
-
     }
 }
