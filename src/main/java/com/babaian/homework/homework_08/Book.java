@@ -70,22 +70,6 @@ public final class Book {
                 " }";
     }
 
-    /*
-
-     Сделал Author внутренним статическим классом, чтобы instance Author создавался так:
-     Book.Author author = Book.Author.setAuthor(...);
-
-     Не знаю, есть ли в этом смысл, но при создании обьекта выходит понятно, что это книжный автор ну и так как у
-     class Author есть доступ к закрытому конструктору class'a Book я добавил возможность
-     создавать книги через обьект class'a Author:
-
-     Book.Author author = Book.Author.setAuthor(...);
-     Book book1 = author.setBook(...);
-
-     Надеюсь, что не перемудрил.
-
-     */
-
     public static final class Author {
         private final String firstName;
         private final String lastName;
@@ -142,7 +126,7 @@ public final class Book {
         }
     }
 
-    enum Genre {
+    public enum Genre {
         FAIRY_TALE("Fairy tale"), FANTASTIC_TALE("Fantastic tales"), MYSTIC_TALE("Mystic");
         private final String genre;
 
