@@ -29,7 +29,7 @@ public class DataProvider {
 
 
     public static void main(String[] args) throws Exception {
-        String dir = "D:\\Java\\hillel\\src\\main\\resources\\lecture_10\\";
+        String dir = "src\\main\\resources\\lecture_10\\";
 //    Scanner scanner = new Scanner(Path.of(dir+"data.txt"), StandardCharsets.UTF_8);
 //    String a = scanner.next();
 //    System.out.println(a);
