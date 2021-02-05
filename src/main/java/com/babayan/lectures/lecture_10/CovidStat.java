@@ -6,11 +6,7 @@ import java.util.Iterator;
 
 public class CovidStat {
     public static void main(String[] args) {
-<<<<<<< HEAD
         String[] a = {"Ma1", "aA2", "aA0", "aA", "aA6", "aA7", "aA1", "Ma1"};
-=======
-        String[] a = {"Ma1", "aA2", "aA0", "aA", "aA6", "aA7", "aA1","Ma1"};
->>>>>>> origin/master
 //        String[] temp = "awdawdaw@mail.com".split("@");
 //        System.out.println(temp[1]);
 //        CovidStat.mostPopular(a);
@@ -39,21 +35,13 @@ public class CovidStat {
                 number = temp;
             }
         }
-<<<<<<< HEAD
+
         Iterator<String> iterator2 = hashMapVariable.keySet().iterator();
         Iterator<Integer> iterator = hashMapVariable.values().iterator();
         while (iterator.hasNext() && iterator2.hasNext()) {
             hashMapVariable2.put(iterator.next(), iterator2.next());
         }
         if (number == 1) {
-=======
-        Iterator <String> iterator2 = hashMapVariable.keySet().iterator();
-        Iterator<Integer> iterator = hashMapVariable.values().iterator();
-        while (iterator.hasNext() && iterator2.hasNext()) {
-            hashMapVariable2.put(iterator.next(),iterator2.next());
-        }
-        if (number==1) {
->>>>>>> origin/master
             return "No!";
         } else return hashMapVariable2.get(number);
     }
