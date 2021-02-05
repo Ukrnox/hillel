@@ -42,7 +42,11 @@ public class Person {
     }
 
     @Override
+<<<<<<< HEAD
     public String toString() {
+=======
+    public String toString(){
+>>>>>>> origin/master
         return "FirstName: " + firstName +
                 ";\nLastName: " + lastName +
                 ";\nAge: " + age +
