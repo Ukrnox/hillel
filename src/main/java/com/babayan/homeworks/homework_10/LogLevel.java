@@ -3,7 +3,7 @@ package com.babayan.homeworks.homework_10;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum LogLevel {
+public enum LogLevel implements Comparable<LogLevel> {
     ALL("ALL.", 1),
     DEBUG("DEBUG:", 2),
     INFO("INFO:", 3),
@@ -18,14 +18,5 @@ public enum LogLevel {
     @Override
     public String toString() {
         return this.name;
-    }
-
-    public int compare(LogLevel level) {  //для проверки уровня логирования. Выше = 1. Равны = 0. Ниже = -1.
-        if (level.value > value) {
-            return -1;
-        } else if (level.value < value) {
-            return 1;
-        }
-        return 0;
     }
 }

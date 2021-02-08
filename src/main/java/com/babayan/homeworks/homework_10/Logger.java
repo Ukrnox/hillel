@@ -8,6 +8,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public abstract class Logger {
+    public static void main(String[] args) {
+        System.out.println(LogLevel.ERROR.compareTo(LogLevel.INFO));
+    }
 
     private LogLevel level;
 
@@ -15,6 +18,9 @@ public abstract class Logger {
     }
 
     public void log(String message, LogLevel level) {
+    }
+    public boolean logLvlCheck(LogLevel level){
+        return level.compareTo(this.level) >= 0;
     }
 
     public void debug(String massage) {

@@ -12,16 +12,14 @@ public class ConsoleLogger extends Logger {
 
     @Override
     public void log(String message) {
-        if (LogLevel.INFO.compare(this.getLevel()) >= 0) { // проверка уровня логирования
-            System.out.println(LocalDateTime.now().format(
-                    DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss")) +
-                    " " + this.getLevel() + " " + message);
-        }
+        System.out.println(LocalDateTime.now().format(
+                DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss")) +
+                " " + this.getLevel() + " " + message);
     }
 
     @Override
     public void log(String message, LogLevel level) {
-        if (level.compare(this.getLevel()) >= 0) {
+        if (logLvlCheck(level)) {
             System.out.println(LocalDateTime.now().format(
                     DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss")) +
                     " " + level + " " + message);

@@ -26,38 +26,35 @@ public class FileLogger extends Logger {
 
     @Override
     public void log(String message) {
-        if (LogLevel.INFO.compare(this.getLevel()) >= 0) {  // проверка уровня логирования
-            FileWriter writer = null;
-            try {
-                writer = new FileWriter(fileName, true);
-                writer.write(LocalDateTime.now().format(
-                        DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss")) +
-                        " " + this.getLevel() + " " + message + "\n");
+        FileWriter writer = null;
+        try {
+            writer = new FileWriter(fileName, true);
+            writer.write(LocalDateTime.now().format(
+                    DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss")) +
+                    " " + this.getLevel() + " " + message + "\n");
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (writer != null) {
+                    writer.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
-            } finally {
-                try {
-                    if (writer != null) {
-                        writer.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         }
     }
 
     @Override
     public void log(String message, LogLevel level) {
-        if (level.compare(this.getLevel()) >= 0) {
+        if (logLvlCheck(level)) {
             FileWriter writer = null;
             try {
                 writer = new FileWriter(fileName, true);
                 writer.write(LocalDateTime.now().format(
                         DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss")) +
                         " " + level + " " + message + "\n");
-
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
