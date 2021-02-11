@@ -14,12 +14,11 @@ public abstract class Logger {
 
     private LogLevel level;
 
-    public void log(String message) {
-    }
+    public abstract void log(String message);
 
-    public void log(String message, LogLevel level) {
-    }
-    public boolean logLvlCheck(LogLevel level){
+    public abstract void log(String message, LogLevel level);
+
+    public boolean logLvlCheck(LogLevel level) {
         return level.compareTo(this.level) >= 0;
     }
 

@@ -12,9 +12,7 @@ public class ConsoleLogger extends Logger {
 
     @Override
     public void log(String message) {
-        System.out.println(LocalDateTime.now().format(
-                DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss")) +
-                " " + this.getLevel() + " " + message);
+        log(message,this.getLevel());
     }
 
     @Override
