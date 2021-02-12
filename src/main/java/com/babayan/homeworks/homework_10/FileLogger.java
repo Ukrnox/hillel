@@ -26,18 +26,28 @@ public class FileLogger extends Logger {
 
     @Override
     public void log(String message) {
-        log(message, this.getLevel());
+        log(message,this.getLevel());
     }
 
     @Override
     public void log(String message, LogLevel level) {
         if (logLvlCheck(level)) {
-            try (FileWriter writer = new FileWriter(fileName, true)) {
+            FileWriter writer = null;
+            try {
+                writer = new FileWriter(fileName, true);
                 writer.write(LocalDateTime.now().format(
                         DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss")) +
                         " " + level + " " + message + "\n");
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    if (writer != null) {
+                        writer.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
