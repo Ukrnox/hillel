@@ -31,8 +31,8 @@ public class Cat {
 
     public HashSet<Mouse> acceleratePopping() {
         log.info("Call method acceleratePopping() from " + this.getName());
-        BlockingDeque<Mouse> tempStomach = getStomach();
+        HashSet <Mouse> acceleratePopping = new HashSet<>(getStomach());
         stomach.clear();
-        return new HashSet<>(tempStomach);
+        return acceleratePopping;
     }
 }
