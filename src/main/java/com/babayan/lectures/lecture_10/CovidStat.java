@@ -1,118 +1,71 @@
 package com.babayan.lectures.lecture_10;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CovidStat {
-    public static void main(String[] args) {
-        String[] a = {"Ma1", "aA2", "aA0", "aA", "aA6", "aA7", "aA1", "Ma1"};
-//        String[] temp = "awdawdaw@mail.com".split("@");
-//        System.out.println(temp[1]);
-//        CovidStat.mostPopular(a);
-        System.out.println(CovidStat.mostPopular(a));
+
+    private final List<Person> data;
+
+    public CovidStat(List<Person> data) {
+        this.data = data.stream().filter(Objects::nonNull).collect(Collectors.toList());
     }
 
-    HashMap<Integer, Person> data;
-
-    public CovidStat(HashMap<Integer, Person> data) {
-        this.data = data;
+    public List<Person> getData() {
+        return new ArrayList<>(data);
     }
 
-    private static String mostPopular(String[] a) {
-        HashMap<String, Integer> hashMapVariable = new HashMap<>();
-        HashMap<Integer, String> hashMapVariable2 = new HashMap<>();
-        for (int i = 0; i < a.length; i++) {
-            if (hashMapVariable.containsKey(a[i])) {
-                hashMapVariable.put(a[i], hashMapVariable.get(a[i]) + 1);
-            } else {
-                hashMapVariable.put(a[i], 1);
-            }
-        }
-        int number = 0;
-        for (int temp : hashMapVariable.values()) {
-            if (temp > number) {
-                number = temp;
-            }
-        }
-
-        Iterator<String> iterator2 = hashMapVariable.keySet().iterator();
-        Iterator<Integer> iterator = hashMapVariable.values().iterator();
-        while (iterator.hasNext() && iterator2.hasNext()) {
-            hashMapVariable2.put(iterator.next(), iterator2.next());
-        }
-        if (number == 1) {
-            return "No!";
-        } else return hashMapVariable2.get(number);
+    private String mostPopularWord(Stream<String> stream) {
+        return stream
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByKey())
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey).orElse(null);
     }
 
     public String getMostPopularName() {
-        String[] name = new String[data.size()];
-        int i = 0;
-        for (Person person : data.values()) {
-            name[i] = person.getFirstName();
-            i++;
-        }
-        return mostPopular(name);
+        return mostPopularWord(data.stream()
+                .map(Person::getFirstName));
     }
 
+
     public String getMostPopularSurname() {
-        String[] name = new String[data.size()];
-        int i = 0;
-        for (Person person : data.values()) {
-            name[i] = person.getLastName();
-            i++;
-        }
-        return mostPopular(name);
+        return mostPopularWord(data.stream()
+                .map(Person::getLastName));
     }
 
     public String getMostPopularMailDomain() {
-        String[] email = new String[data.size()];
-        int i = 0;
-        for (Person person : data.values()) {
-            String[] temp = person.getEmail().split("@");
-            email[i] = temp[1];
-            i++;
-        }
-        return mostPopular(email);
+        return mostPopularWord(data.stream()
+                .map(Person::getEmail)
+                .flatMap(Pattern.compile("(?=@)")::splitAsStream)
+                .filter(w -> w.contains("@")));
     }
 
-    private int averageNum(int[] nums) {
-        int temp = 0;
-        for (int num : nums) {
-            temp += num;
-        }
-        return temp / nums.length;
+    private int sum(Stream<Integer> stream) {
+        return stream.reduce(0, Integer::sum) / data.size();
     }
 
     public int getAverageAge() {
-        int[] nums = new int[data.size()];
-        int i = 0;
-        for (Person person : data.values()) {
-            nums[i] = person.getAge();
-            i++;
-        }
-        return averageNum(nums);
+        return sum(data.stream()
+                .map(Person::getAge));
     }
 
     public int getAverageHeight() {
-        int[] nums = new int[data.size()];
-        int i = 0;
-        for (Person person : data.values()) {
-            nums[i] = person.getHeight();
-            i++;
-        }
-        return averageNum(nums);
+        return sum(data.stream()
+                .map(Person::getHeight));
     }
 
     public int getAverageWeight() {
-        int[] nums = new int[data.size()];
-        int i = 0;
-        for (Person person : data.values()) {
-            nums[i] = person.getWeight();
-            i++;
-        }
-        return averageNum(nums);
+        return sum(data.stream()
+                .map(Person::getWeight));
     }
 
 }

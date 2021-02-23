@@ -1,21 +1,18 @@
 package com.babayan.lectures.lecture_10;
 
-import java.util.HashMap;
-
 public class DataMapper {
-    private final HashMap<Integer, Person> personData;
-    private static int id = 1;
 
-    public DataMapper() {
-        personData = new HashMap<>();
-    }
-
-    public void add(String firstName, String lastName, java.lang.Integer age, Integer height, Integer weight, String email) {
-        Person person = new Person(firstName, lastName, age, height, weight, email);
-        personData.put(id++, person);
-    }
-
-    public HashMap<Integer, Person> getPersonData() {
-        return personData;
+    public static Person apply(String s) {
+        try {
+            String[] line = s.split(",");
+            return new Person(line[0], line[1],
+                    Integer.valueOf(line[2]),
+                    Integer.valueOf(line[3]),
+                    Integer.valueOf(line[4]),
+                    line[5]);
+        } catch (NullPointerException | NumberFormatException | IndexOutOfBoundsException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
