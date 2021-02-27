@@ -2,7 +2,7 @@ package com.babayan.homeworks.homework_15;
 
 public class DataFactoryCreator extends DataFactory {
 
-    DataFactoryCreator(String path) {
+    public DataFactoryCreator(String path) {
         super(path);
     }
 
