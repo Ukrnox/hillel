@@ -16,12 +16,9 @@ public class JsonGetter {
                     "\n";
             outputStream.write(s.getBytes());
             response = new StringBuilder();
-            System.out.println(socket.isConnected());
             try {
                 int ch;
-                while (socket.isConnected()) {
-                    ch = inputStream.read();
-                    System.out.print((char) ch);
+                while ((ch = inputStream.read())!=-1) {
                     response.append((char) ch);
                 }
             } catch (SocketException e) {
