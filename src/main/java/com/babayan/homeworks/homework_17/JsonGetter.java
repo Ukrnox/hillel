@@ -31,7 +31,12 @@ public class JsonGetter {
             e.printStackTrace();
             return null;
         }
-        String[] split = response.toString().split("\n(?=\\{)");
-        return split[1];
+        try {
+            String[] split = response.toString().split("\n(?=\\{)");
+            return split[1];
+        }catch (ArrayIndexOutOfBoundsException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }
