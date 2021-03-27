@@ -1,0 +1,53 @@
+SELECT * FROM users;
+
+PRAGMA foreign_keys
+
+SELECT * FROM users;
+SELECT * FROM groups;
+SELECT * FROM usersGroups;
+SELECT * FROM roles;
+SELECT * from roles WHERE id=1;
+SELECT * FROM users WHERE id=1;
+
+UPDATE usersGroups SET groupID = 3 WHERE userID = 1
+DELETE FROM usersGroups WHERE userID = 1
+
+
+PRAGMA foreign_keys=on;
+
+create table roles (
+    id integer INTEGER primary KEY,
+    name text,
+    description text
+);
+
+create table users (
+    id integer INTEGER PRIMARY KEY,
+    name text,
+    login text,
+    password text,
+    role INTEGER NOT NULL,
+    foreign key(role) references roles (id)
+);
+
+create table groups (
+    id integer INTEGER primary KEY,
+    name text,
+    description text
+);
+
+create table usersGroups (
+    groupID INTEGER NOT NULL,
+    userID INTEGER NOT NULL,
+    FOREIGN KEY(groupID) REFERENCES groups(id),
+    FOREIGN KEY(userID) REFERENCES users(id)
+);
+
+select * from usersGroups ug
+join groups g on ug.groupID=g.id
+join users u on ug.userID=u.id;
+
+drop table if exists usersGroups;
+drop table if exists users;
+drop table if exists roles;
+drop table if exists groups;
