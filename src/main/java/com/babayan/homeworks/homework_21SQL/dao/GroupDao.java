@@ -33,8 +33,7 @@ public class GroupDao implements DAO<Group> {
     public Group read(long id) {
         Group group = null;
 
-        try (PreparedStatement ps = con.prepareStatement(GROUP_SELECT
-        )) {
+        try (PreparedStatement ps = con.prepareStatement(GROUP_SELECT)) {
             ps.setLong(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 String name = rs.getString("name");
