@@ -1,11 +1,8 @@
 package com.babayan.homeworks.homework_21SQL.dao;
 
 import com.babayan.homeworks.homework_21SQL.entity.Role;
-import com.babayan.homeworks.homework_21SQL.entity.User;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class RoleDao implements DAO<Role> {
 
@@ -14,27 +11,9 @@ public class RoleDao implements DAO<Role> {
     private final String ROLE_SELECT = "SELECT * from roles WHERE id = ?";
     private final String ROLE_UPDATE = "UPDATE roles SET name = ?, description = ? WHERE id = ?";
     private final String ROLE_DELETE = "DELETE FROM roles WHERE id = ";
-    private final String USER_SELECT_BY_ROLE = "SELECT * from users WHERE role = ?";
 
     public RoleDao(Connection con) {
         this.con = con;
-    }
-
-    public List<User> readByRoleId(long roleID) {
-        UserDao ud = new UserDao(con);
-        List<User> users = new ArrayList<>();
-        UsersGroupsDao ugd = new UsersGroupsDao(con);
-        try (PreparedStatement preparedStatement = con.prepareStatement(USER_SELECT_BY_ROLE)) {
-            preparedStatement.setLong(1, roleID);
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    users.add(ud.read(resultSet.getLong("id")));
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return users;
     }
 
     @Override

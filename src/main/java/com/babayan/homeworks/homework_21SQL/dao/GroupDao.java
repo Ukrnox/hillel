@@ -7,9 +7,10 @@ import java.sql.*;
 public class GroupDao implements DAO<Group> {
     private Connection con;
     private final String GROUP_INSERT = "INSERT INTO groups (id, name, description) VALUES (?, ?, ?)";
-    private final String GROUP_SELECT = "SELECT * FROM groups WHERE id = ?";
+    private final String GROUP_SELECT = "SELECT g.name, g.description FROM groups g WHERE id = ?";
     private final String GROUP_UPDATE = "UPDATE groups SET name = ?, description = ? WHERE id = ?";
     private final String GROUP_DELETE = "DELETE FROM groups WHERE id = ";
+    private final String UG_DELETE_GROUP = "DELETE FROM usersGroups WHERE groupID = ";
 
     public GroupDao(Connection con) {
         this.con = con;
@@ -64,10 +65,17 @@ public class GroupDao implements DAO<Group> {
      */
     @Override
     public void delete(long groupId) {
-        UsersGroupsDao ug = new UsersGroupsDao(con);
         try (Statement stmt = con.createStatement()) {
-            ug.deleteGroup(groupId);
+            deleteGroupFromUsersGroups(groupId);
             stmt.execute(GROUP_DELETE + groupId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteGroupFromUsersGroups(long userId) {
+        try (Statement stmt = con.createStatement()) {
+            stmt.execute(UG_DELETE_GROUP + userId);
         } catch (SQLException e) {
             e.printStackTrace();
         }
