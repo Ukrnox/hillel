@@ -26,7 +26,7 @@ class GroupDaoTest {
     private static Connection getConnection() {
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:D:/Java/hillel/src/main/resources/test.db");
+            connection = DriverManager.getConnection("jdbc:sqlite:src/main/resources/test.db");
         } catch (SQLException e) {
             e.printStackTrace();
         }
